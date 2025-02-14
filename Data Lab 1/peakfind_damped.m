@@ -1,10 +1,10 @@
-function t_value = peakfind(time,disp)
+function t_value = peakfind_damped(time,disp)
 %plot data
 figure(1)
 plot(time,disp)
 xlabel('Time (s)')
 ylabel('Amplitude (rad)')
-%xlim([2 3])   %sets axis limits for viewing options xmin, xmax
+xlim([1.5 3])   %sets axis limits for viewing options xmin, xmax
 grid on
 
 %Finding the peak
@@ -20,19 +20,19 @@ figure(2)
 plot(time,disp)
 xlabel('Time (s)')
 ylabel('Amplitude (rad)')
-%xlim([2 3])
+xlim([1.5 3])
 hold on
 plot(t,y,'r')
 
 
-[p1,ind]=max(y);
+[p1,ind]=min(y);
 t_value = t(ind);
 
 figure(3)
 plot(time,disp)
 xlabel('Time (s)')
 ylabel('Amplitude (rad)')
-%xlim([2 3])
+xlim([1.5 3])
 hold on
 plot(t,y,'r')
 plot(t_value,p1,'k*')
