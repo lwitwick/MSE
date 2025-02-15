@@ -45,7 +45,7 @@ torque5 = data(:,2);
 disp5 = data(:,4);
 
 curveFitter(disp5, torque5)
-% ----------------------------------------------------
+%----------------------------------------------------
 data = textread('t1_6.txt','','headerlines',22);
 time6 = data(:,1);
 torque6 = data(:,2);
