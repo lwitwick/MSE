@@ -1,4 +1,4 @@
-function t_value = peakfind_damped(time,disp)
+function [t_value = peakfind_damped(time,disp)
 %plot data
 figure(1)
 plot(time,disp)

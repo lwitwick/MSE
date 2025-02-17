@@ -61,6 +61,19 @@ fprintf("Spring Rate: %d\n",k)
 fprintf("Damping Coefficient Test 1: %2f\nDamping Coefficient Test 2: %2f \n", c1, c2)
 fprintf("Damping Ratio Test 1: %4f\nDamping Ratio Test 2: %4f\n",dampingRatio1, dampingRatio2)
 
+figure()
+hold on
+subplot(2,1,1)
+plot(time1,disp1)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 1')
+subplot(2,1,2)
+plot(time2,disp2)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 2')
+hold off
 %% Question 3 (need to run Q2 for some values)
 [wn_ratio3,wn2,wn3,dampingRatio2,dampingRatio3] = getNaturalFreqRatio(time2,disp2,time3,disp3);
 
@@ -69,6 +82,19 @@ mass_block = I_2*(wn_ratio3-1)/r^2;
 
 fprintf('Disk Mass %2f\n',mass_block)
 
+figure()
+hold on
+subplot(2,1,1)
+plot(time2,disp2)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 2')
+subplot(2,1,2)
+plot(time3,disp3)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 3')
+hold off
 %% Question 5
 [wn_ratio5,wn4,wn5,dampingRatio4,dampingRatio5] = getNaturalFreqRatio(time4,disp4,time5,disp5);
 
@@ -83,6 +109,19 @@ fprintf("Spring Rate: %d\n",k_5)
 fprintf("Damping Coefficient Test 4: %2f\nDamping Coefficient Test 5: %2f \n", c4, c5)
 fprintf("Damping Ratio Test 4: %4f\nDamping Ratio Test 5: %4f\n",dampingRatio4, dampingRatio5)
 
+figure()
+hold on
+subplot(2,1,1)
+plot(time4,disp4)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 4')
+subplot(2,1,2)
+plot(time5,disp5)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 5')
+hold off
 %% Question 6
 [wn_ratio6,wn6,wn7,dampingRatio6,dampingRatio7] = getNaturalFreqRatio(time6,disp6,time7,disp7);
 
@@ -96,3 +135,17 @@ fprintf("Disk 3 Moment of Inertia: %4f\n",I_disk3)
 fprintf("Spring Rate: %d\n",k_6)
 fprintf("Damping Coefficient Test 6: %2f\nDamping Coefficient Test 7: %2f \n", c6, c7)
 fprintf("Damping Ratio Test 6: %4f\nDamping Ratio Test 7: %4f\n",dampingRatio6, dampingRatio7)
+
+figure()
+hold on
+subplot(2,1,1)
+plot(time6,disp6)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 6')
+subplot(2,1,2)
+plot(time7,disp7)
+xlabel('Time (s)')
+ylabel('Displacement (m)')
+title('Torsional Test 7')
+hold off

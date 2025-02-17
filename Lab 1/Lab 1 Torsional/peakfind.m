@@ -1,4 +1,4 @@
-function t_value = peakfind(time,disp)
+function [t_value, xt_value] = peakfind(time,disp)
 %plot data
 figure(1)
 plot(time,disp)
@@ -27,6 +27,7 @@ plot(t,y,'r')
 
 [p1,ind]=max(y);
 t_value = t(ind);
+xt_value = y(ind);
 
 figure(3)
 plot(time,disp)
