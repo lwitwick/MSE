@@ -18,19 +18,16 @@ data1 = textread('t2_1_1.txt','','headerlines',22);
 time1 = data1(:,1);
 disp1 = data1(:,3);
 figure(1)
-plot(time1, disp1)
 
 data2 = textread('t2_1_2.txt','','headerlines',22);
 time2 = data2(:,1);
 disp2 = data2(:,3);
 figure(2)
-plot(time2,disp2)
 
 data3 = textread('t2_1_3.txt','','headerlines',22);
 time3 = data3(:,1);
 disp3 = data3(:,3);
 figure(3)
-plot(time3,disp3)
 
 data4 = textread('t2_2_1.txt','','headerlines',22);
 time4 = data4(:,1);
