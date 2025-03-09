@@ -1,0 +1,30 @@
+clear all
+close all
+clc
+
+% ----------------------------------------------------
+
+% 24-452 MSE Spring 2025 Group B3 
+% LAB 2 - Rectilinear - Experiment 1
+fprintf('\n24-452 MSE Lab 2\n');
+
+% make current folder
+ cd('C:\Users\kgbar\Documents\MSE\MSE\Lab 2\LAB2_Rectilinear')
+ 
+ m = [1.717 1.717 1.717 0.492];
+ c = [20 40 60 40];
+ F0 = 2;
+%% ----------------------------------------------------
+[time, force, disp, velo] = readf('t2_1_1.txt');
+tau_1_exp = calc_time_const('t2_1_1.txt');
+tau_1 = m(1)./c(1)
+fprintf("Time Constant Experiment 1: %f\n",tau_1_exp)
+
+figure()
+plot(time,velo)
+v = (F0./c(1)).*(1-exp(-time./tau_1))
+plot(time,v)
+xlim([0.1 time(end)]) % delay of 0.1 seconds during experiments
+xlabel('Time (s)')
+ylabel('Amplitude')
+title('Experimental Response vs. Theoretical Response')
