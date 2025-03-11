@@ -24,7 +24,6 @@ ylabel('Amplitude (rad)')
 hold on
 plot(t,y,'r')
 
-
 [p1,ind]=max(y);
 t_value = t(ind);
 xt_value = y(ind);

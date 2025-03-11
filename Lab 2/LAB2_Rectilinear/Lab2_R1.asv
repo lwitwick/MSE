@@ -11,20 +11,24 @@ fprintf('\n24-452 MSE Lab 2\n');
 % make current folder
  cd('C:\Users\kgbar\Documents\MSE\MSE\Lab 2\LAB2_Rectilinear')
  
- m = [1.717 1.717 1.717 0.492];
+ m = [2.487 2.487 2.487 1.262];
  c = [20 40 60 40];
  F0 = 2;
 %% ----------------------------------------------------
-[time, force, disp, velo] = readf('t2_1_1.txt');
-tau_1_exp = calc_time_const('t2_1_1.txt');
-tau_1 = m(1)./c(1)
-fprintf("Time Constant Experiment 1: %f\n",tau_1_exp)
+for i = 1:4;
+    tau = calc_time_const(step_files(i));
+    c_exp = m(i)./tau(i);
+    tau_theoretical = m(i)./c(i);
+    fprintf("Time Constant Test %d: %f\n",i,tau)
+    fprintf("Damping Coefficient Test %d: %f\n",i,c_exp)
+    fprintf("Theoretical Time Constant Test %d: %f\n",i,tau_theoretical)
+end
 
-figure()
-plot(time,velo)
-v = (F0./c(1)).*(1-exp(-time./tau_1))
-plot(time,v)
-xlim([0.1 time(end)]) % delay of 0.1 seconds during experiments
-xlabel('Time (s)')
-ylabel('Amplitude')
-title('Experimental Response vs. Theoretical Response')
+%%
+impulse_files = ["t2_2_1.txt" "t2_2_2.txt" "t2_2_3.txt" "t2_2_4.txt"];
+
+for i = 1:4;
+    peak = peakfinder(impulse_files(i));
+    F0 = peak./m(1);
+    fprintf("F0 Test %d: %f\n",i,F0)
+end
