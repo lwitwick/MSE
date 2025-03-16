@@ -6,7 +6,7 @@ figure()
 plot(time,velo)
 xlim([0.1 time(end)]) % delay of 0.1 seconds during experiments
 xlabel('Time (s)')
-ylabel('Amplitude')
+ylabel('Velocity (m/s)')
 title('Find time constant from impulse response '+string(i))
  
 [x, y]=ginput(2);
@@ -24,13 +24,15 @@ plot(t_value,p1,'k*')
 peak = y(ind);
 peak_index = find(velo == peak, 1, 'first');
 
-% Find the 
+% Find the minimum value
 [x0, y0]=ginput(2);
 indx_base=find(time>x0(1) & time<x0(2));
 % base value
-minimum = mean(velo(indx_base));
+min = mean(velo(indx_base));
+height = peak-min
+
 % value at 1 time constant
-target_value = (1-0.632)*peak;
+target_value = (1-0.632)*(peak-min);
 % find index greater than target_value
 t_indx = find(velo(peak_index:end) <= target_value, 1, 'first')+ peak_index;
 time_constant = time(t_indx);

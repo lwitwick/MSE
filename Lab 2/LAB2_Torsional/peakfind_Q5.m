@@ -3,6 +3,7 @@ function [t_value, xt_value] = peakfind_Q5(file_name)
 
 %plot data
 figure()
+hold on
 plot(time,velo)
 xlabel('Time (s)')
 ylabel('Velocity (m/s)')
@@ -18,27 +19,22 @@ t=time(indx);
 y=velo(indx);
 
 %plot the selected region
-figure(2)
 plot(time,velo)
 xlabel('Time (s)')
 ylabel('Velocity (m/s)')
 %xlim([2 3])
-hold on
 plot(t,y,'r')
 
 [p1,ind]=max(y);
 t_value = t(ind);
 xt_value = y(ind);
 
-figure(3)
 plot(time,velo)
 xlabel('Time (s)')
 ylabel('Velocity (m/s)')
 %xlim([2 3])
-hold on
 plot(t,y,'r')
 plot(t_value,p1,'k*')
-
 end
 
 
