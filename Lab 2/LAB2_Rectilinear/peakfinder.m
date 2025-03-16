@@ -1,4 +1,4 @@
-function peak = peakfinder(file_name);
+function [peak, time] = peakfinder(file_name);
 [time, force, disp, velo] = readf(file_name);
 
 % plot figure

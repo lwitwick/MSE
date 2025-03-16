@@ -1,4 +1,4 @@
-function time_constant = calc_time_const(file_name)
+function [time_constant,time] = calc_time_const(file_name,i)
 [time, force, disp, velo] = readf(file_name);
 
 % plot figure
@@ -6,8 +6,8 @@ figure()
 plot(time,velo)
 xlim([0.1 time(end)]) % delay of 0.1 seconds during experiments
 xlabel('Time (s)')
-ylabel('Amplitude')
-title('Find time constant from step response')
+ylabel('Velocity (m/s)')
+title('Find time constant from step response '+string(i))
  
 [x, y]=ginput(2);
 indx=find(time>x(1) & time<x(2));
