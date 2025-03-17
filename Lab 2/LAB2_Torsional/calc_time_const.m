@@ -16,7 +16,7 @@ indx=find(time>x(1) & time<x(2));
 hold on
 plot(time(indx), velo(indx),'color','r','Linewidth',4)
 
-% final value
+% max value
 amp = mean(velo(indx));
 % value at 1 time constant
 target_value = 0.632*amp;
