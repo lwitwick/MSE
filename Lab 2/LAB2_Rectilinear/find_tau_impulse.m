@@ -1,4 +1,4 @@
-function [time_constant,time,t_value] = find_tau_impulse(file_name,i)
+function [time_constant,time,t_value,peak] = find_tau_impulse(file_name,i)
 [time, force, disp, velo] = readf(file_name);
 
 % plot figure
@@ -29,10 +29,10 @@ peak_index = find(velo == peak, 1, 'first');
 indx_base=find(time>x0(1) & time<x0(2));
 % base value
 min = mean(velo(indx_base));
-height = peak-min
+height = peak-min;
 
 % value at 1 time constant
-target_value = (1-0.632)*(peak-min);
+target_value = ((1-0.632)*(height))+min;
 % find index greater than target_value
 t_indx = find(velo(peak_index:end) <= target_value, 1, 'first')+ peak_index;
 time_constant = time(t_indx);

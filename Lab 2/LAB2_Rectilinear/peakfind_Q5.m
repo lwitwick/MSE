@@ -1,12 +1,12 @@
-function [t_value, xt_value] = peakfind_Q5(file_name)
+function [t_value, xt_value] = peakfind_Q5(file_name,i)
 [time, force, disp, velo] = readf(file_name);
 
 %plot data
 figure()
-hold on
 plot(time,velo)
 xlabel('Time (s)')
 ylabel('Velocity (m/s)')
+title('Initial Condition Experiment '+string(i))
 %xlim([2 3])   %sets axis limits for viewing options xmin, xmax
 grid on
 
@@ -19,6 +19,7 @@ t=time(indx);
 y=velo(indx);
 
 %plot the selected region
+hold on
 plot(time,velo)
 xlabel('Time (s)')
 ylabel('Velocity (m/s)')

@@ -16,8 +16,8 @@ m = [2.487 1.262 0.77];
 file_names = ["t3_1_1.txt" "t3_1_2.txt" "t3_1_3.txt"]
 
 for i = 1:3;
-  t_firstpeak = peakfind_Q5(file_names(i));
-  t_thirdpeak = peakfind_Q5(file_names(i));
+  t_firstpeak = peakfind_Q5(file_names(i),i);
+  t_thirdpeak = peakfind_Q5(file_names(i),i);
   T = (t_thirdpeak-t_firstpeak)/2;
   delta = 0.5 * log(t_firstpeak/t_thirdpeak);
   dampingRatio = 1/sqrt(1 + ((2*pi)/delta)^2);
