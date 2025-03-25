@@ -1,15 +1,17 @@
-close all
-%   clc
-clear all
+function [m,c,k] = frf_fitting(file_name,i);
+% close all
+% clc
+% clear all
 
-%% Read file
-[freq,amp,pha]=readfreq('f3_1_1.txt',1,10);
+% Read file
+[freq,amp,pha]=readfreq(file_name,1,10);
 
 
 % Plotting amplitude
-figure(1)
+figure()
 plot(amp,'r')
 ylabel('Amplitude (mm)')
+title(string(i))
 
 % Select region to fit FRF
 xx = ginput(2);
@@ -20,7 +22,7 @@ amp=amp/1000; %Convert FRF into SI units
 % Please check your units and divide accrodingly
 Gs = amp(indx).*exp(1i*pha(indx));
 
-%% Using rational fraction form to get the parameters
+% Using rational fraction form to get the parameters
 
 % Express the FRF in rational fraction polynomial form
 [num,den] = invfreqs(Gs,freq(indx)*2*pi,0,2);
@@ -32,9 +34,10 @@ hh = freqs(num,den,freq*2*pi);
 mag = abs(hh);
 ang = angle(hh);
 
-%% Plotting experimental and fitted data
+% Plotting experimental and fitted data
 
-figure(2)
+figure()
+title("Frequency Response Functions Setup "+string(i))
 subplot(2,1,1)
 plot(freq,amp,'r')
 hold on
@@ -48,11 +51,13 @@ hold on
 plot(freq,ang)
 xlabel('Frequency (Hz)')
 ylabel('Phase (rad)')
+
 hold off
 
-%% Find Parameters [m, c, k]
+% Find Parameters [m, c, k]
 
 param = den/num;
-m=param(1)
-c=param(2)
-k=param(3)
+m=param(1);
+c=param(2);
+k=param(3);
+end
