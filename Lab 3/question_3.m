@@ -26,4 +26,43 @@ fprintf('\n24-452 MSE Lab 3 Experiment 3\n');
      fprintf("Spring Constant Setup %d: %f\n",i,k)
  end
      
- 
+ %% Question 8
+figure()
+hold on
+for i = 1:5;
+    [freq,amp,pha]=readfreq(file_names(i),1,10);
+    plot(freq,amp)
+end
+title("FRF Amplitudes of Tests with Varying Damping")
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mm/N)')
+legend("c=1","c=2","c=8","c=15","c=35")
+hold off
+
+%% Question 9
+
+figure()
+hold on
+for i = 7:9;
+    [freq,amp,pha]=readfreq(file_names(i),1,10);
+    plot(freq,amp)
+end
+title("FRF Amplitudes of Tests with Varying Mass")
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mm/N)')
+legend("No Mass", "Two big weights","All the mass")
+hold off
+
+%% Question 10
+
+figure()
+hold on
+for i = 6:7;
+    [freq,amp,pha]=readfreq(file_names(i),1,10);
+    plot(freq,amp)
+end
+title("FRF Amplitudes of Tests with Varying Spring Constant")
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mm/N)')
+legend("k=100","k=0")
+hold off

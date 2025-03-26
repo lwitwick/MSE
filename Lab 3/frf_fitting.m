@@ -37,13 +37,13 @@ ang = angle(hh);
 % Plotting experimental and fitted data
 
 figure()
-title("Frequency Response Functions Setup "+string(i))
 subplot(2,1,1)
 plot(freq,amp,'r')
 hold on
 plot(freq,mag)
 xlabel('Frequency (Hz)')
 ylabel('Amplitude (mm/N)')
+title("Frequency Response Functions Setup "+string(i))
 
 subplot(2,1,2)
 plot(freq,pha,'r')
