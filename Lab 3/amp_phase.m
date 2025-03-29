@@ -3,7 +3,7 @@ clc
 clear all
 
 %% Reading file
-[time,force,resp] = readf2('Exp1_test1(time).txt');
+[time,force,resp] = readf2('t4_1_1.txt');
 
 figure(1)
 plot(time,force)
