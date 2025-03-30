@@ -74,16 +74,21 @@ hold off
 %% Question 11
 freq_Hz = 1:0.5:10;
 freq_rads = freq_Hz*2*pi;
-amplitude_ratio = zeros(length(freq_rads),1);
-phase_diff = zeros(length(freq_rads),1);
+amplitude_ratio = zeros(1,length(freq_rads));
+phase_diff = zeros(1,length(freq_rads));
+
+m1 = m(1);
+c1 = c(1);
+k1 = k(1);
 
 for j = 1:length(freq_rads);
-tspan = readf2(file_names(1));   %Time span
+freq = freq_rads(j);
+tmax = max(readf2(file_names(1)));   %Max time
 x0 = [0; 0];                     % Initial conditions
 
 % Solve ODE
-secondorder = @(t, q) [q(2); (1.2*sin(freq_rads*t)-c(1)*q(2)-k(1)*q(1))/m(1)];
-[t, x] = ode45(secondorder, tspan, x0);
+secondorder = @(t, q) [q(2); (1.2*sin(freq*t)-c1*q(2)-k1*q(1))/m1];
+[t, x] = ode45(secondorder, [0 tmax], x0);
 
 % Plot results
 figure()
@@ -92,11 +97,11 @@ plot(t, x(:,1))
 xlabel('Time (s)'); ylabel('Displacement (m)')
 title('Mass-Spring-Damper System Response')
 
-force = 1.2*sin(freq_rads(j)*t);
+force = 1.2*sin(freq*t);
 plot(t,force)
 hold off
 
-F = freq_Hz(i); % Frequency [Hz]
+F = freq_Hz(j); % Frequency [Hz]
 T = 1/F; % Sampling Period [s]
 
 % We assume that steady state has been reached after 20 sec.
@@ -145,10 +150,27 @@ fprintf("Phase %d: %f\n",j,phase_diff(j))
 end
 
 %% Next Part
-figure()
-hold on
-plot(freq_Hz,phase_diff)
+[freq,amp,pha]=readfreq('f3_1_1.txt',1,10);
 
+figure()
+subplot(2,1,1)
+plot(freq,amp,'r')
+hold on
+plot(freq_Hz,amplitude_ratio*1000,"o")
+xlabel('Frequency (Hz)')
+ylabel('Amplitude (mm/N)')
+title("Simulated FRF against experimental response 1")
+
+subplot(2,1,2)
+plot(freq,pha,'r')
+hold on
+plot(freq_Hz,phase_diff,"o")
+xlabel('Frequency (Hz)')
+ylabel('Phase (rad)')
+
+hold off
+
+legend("Experimental Response","Simulated Response")
 %%
 % function dq = secondorder(t,q,m,c,k,freq)
 %     A = [0 1; -k/m -c/m];
