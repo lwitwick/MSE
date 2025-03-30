@@ -72,8 +72,8 @@ legend("k=100","k=0")
 hold off
 
 %% Question 11
-freq_Hz = 1:0.5:10;
-freq_rads = freq_Hz*2*pi;
+freq_Hz = 1:0.5:10;                             % Tested frequencies in Hz
+freq_rads = freq_Hz*2*pi;                       % Tested frequencies in rad
 amplitude_ratio = zeros(1,length(freq_rads));
 phase_diff = zeros(1,length(freq_rads));
 
@@ -82,27 +82,18 @@ c1 = c(1);
 k1 = k(1);
 
 for j = 1:length(freq_rads);
-freq = freq_rads(j);
-tmax = max(readf2(file_names(1)));   %Max time
-x0 = [0; 0];                     % Initial conditions
+freq = freq_rads(j);                    % Frequency [rad]
+tmax = max(readf2(file_names(1)));      % Max time [s]
+x0 = [0; 0];                            % Initial conditions
 
 % Solve ODE
 secondorder = @(t, q) [q(2); (1.2*sin(freq*t)-c1*q(2)-k1*q(1))/m1];
 [t, x] = ode45(secondorder, [0 tmax], x0);
 
-% Plot results
-figure()
-hold on
-plot(t, x(:,1))
-xlabel('Time (s)'); ylabel('Displacement (m)')
-title('Mass-Spring-Damper System Response')
+force = 1.2*sin(freq*t);                % Forcing function
 
-force = 1.2*sin(freq*t);
-plot(t,force)
-hold off
-
-F = freq_Hz(j); % Frequency [Hz]
-T = 1/F; % Sampling Period [s]
+F = freq_Hz(j);                         % Frequency [Hz]
+T = 1/F;                                % Sampling Period [s]
 
 % We assume that steady state has been reached after 20 sec.
 indx_start = find(t>20);
@@ -113,15 +104,6 @@ ind_range = indx_start(1):indx_end(1);
 tt = t(ind_range);
 ff = force(ind_range);
 rr = x(ind_range);
-
-% Plot individual cycles
-figure()
-plot(tt,ff)
-hold on
-plot(tt,rr,'r')
-xlabel('Time (s)')
-ylabel('Amplitude')
-legend('Input Force(N)','Output Displacement(mm)')
 
 % Finding amplitude ratio
 
@@ -137,19 +119,12 @@ indx_amp_rr = find(rr == max(rr));
 t1 = tt(indx_amp_ff);
 t2 = tt(indx_amp_rr);
 
-% Plot these points
-plot(t1,max(ff),'*')
-plot(t2,max(rr),'*r')
-
 % Calculate
 amplitude_ratio(j) = amp_rr/amp_ff;
 phase_diff(j) = (t1-t2)/T*2*pi;
-
-fprintf("Amplitude %d: %f\n",j,amplitude_ratio(j))
-fprintf("Phase %d: %f\n",j,phase_diff(j))
 end
 
-%% Next Part
+% Plotting Experimental Response against Simulated Response
 [freq,amp,pha]=readfreq('f3_1_1.txt',1,10);
 
 figure()
@@ -160,6 +135,7 @@ plot(freq_Hz,amplitude_ratio*1000,"o")
 xlabel('Frequency (Hz)')
 ylabel('Amplitude (mm/N)')
 title("Simulated FRF against experimental response 1")
+legend("Experimental Response","Simulated Response")
 
 subplot(2,1,2)
 plot(freq,pha,'r')
@@ -169,13 +145,3 @@ xlabel('Frequency (Hz)')
 ylabel('Phase (rad)')
 
 hold off
-
-legend("Experimental Response","Simulated Response")
-%%
-% function dq = secondorder(t,q,m,c,k,freq)
-%     A = [0 1; -k/m -c/m];
-%     B = [0; 1/m];
-% 
-%     dq = A*q+B*1.2*sin(2*pi*freq*t);
-% end
-
