@@ -20,21 +20,32 @@ c = [0 0 0 0 0];
  %% Question 1
  
  % Car 1 Data
- for i = 1:3;
+ for i = 1:3
      [t,force,disp1,disp2] = readf(time_files(i));
-     wn(i) = getNaturalFreq(t,disp1);
+     [wn(i),dampingRatio(i)] = getNaturalFreq(t,disp1);
  end
 
   % Car 2 Data
- for i = 4:5;
+ for i = 4:5
      [t,force,disp1,disp2] = readf(time_files(i));
-     wn(i) = getNaturalFreq(t,disp2);
+     [wn(i),dampingRatio(i)] = getNaturalFreq(t,disp2);
  end
 %%
-wn_ratio1 = wn(2)/wn(1)
-wn_ratio2 = wn(5)/wn(4)
-mass1 = (1.9585*wn_ratio1)/(1 - wn_ratio1)
-mass2 = (1.9585*wn_ratio2)/(1 - wn_ratio2)
+wn_ratio1 = wn(2)/wn(1);
+wn_ratio2 = wn(5)/wn(4);
+mass1 = (1.9585*wn_ratio1^2)/(1 - wn_ratio1^2)
+mass2 = (1.9585*wn_ratio2^2)/(1 - wn_ratio2^2)
 
-%k = wn^2 * m;
-%c = dampingRatio * 2 * sqrt(k*m);
+for i = 1:3
+    k(i) = wn(i)^2 * (mass1+m(i));
+    c(i) = dampingRatio(i) * 2 * sqrt(k(i)*(mass1+m(i)));
+    fprintf("Damping Coefficient Test %d: %f\n",i,c(i))
+    fprintf("Spring Stiffness Test %d: %f\n",i,k(i)) 
+end
+
+for i = 4:5
+    k(i) = wn(i)^2 * (mass2+m(i));
+    c(i) = dampingRatio(i) * 2 * sqrt(k(i)*(mass2+m(i)));
+    fprintf("Damping Coefficient Test %d: %f\n",i,c(i))
+    fprintf("Spring Stiffness Test %d: %f\n",i,k(i))
+end

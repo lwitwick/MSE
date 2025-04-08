@@ -20,19 +20,25 @@ c = [0 0 0 0 0];
  %% Question 1
  
  % Car 1 Data
- for i = 1:3;
+ for i = 1:3
      [t,force,disp1,disp2] = readf(time_files(i));
      wn(i) = getNaturalFreq(t,disp1);
  end
 
   % Car 2 Data
- for i = 4:5;
+ for i = 4:5
      [t,force,disp1,disp2] = readf(time_files(i));
      wn(i) = getNaturalFreq(t,disp2);
  end
+%%
+wn_ratio1 = wn(2)/wn(1)
+wn_ratio2 = wn(5)/wn(4)
+mass1 = (1.9585*wn_ratio1)/(1 - wn_ratio1)
+mass2 = (1.9585*wn_ratio2)/(1 - wn_ratio2)
 
-mass1 = 1.9585/((wn(2)^2/wn(1)^2)-1)
-mass2 = 1.9585/((wn(5)^2/wn(4)^2)-1)
-
+for i = 1:3
+    k(i) = wn(i)^2 * (mass1+m(i));
+    c(i) = dampingRatio(i) * 2 * sqrt(k(i)*(mass1+m(i)));
+end
 %k = wn^2 * m;
 %c = dampingRatio * 2 * sqrt(k*m);

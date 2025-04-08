@@ -1,4 +1,4 @@
-function [wn] = getNaturalFreq(time,disp)
+function [wn,dampingRatio] = getNaturalFreq(time,disp)
 t_firstpeak = peakfind(time,disp);
 t_secondpeak = peakfind(time,disp);
 T = (t_secondpeak-t_firstpeak);
