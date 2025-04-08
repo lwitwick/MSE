@@ -28,6 +28,11 @@ fprintf('\n24-452 MSE Lab 3 Experiment 3\n');
      fprintf("Mass Setup %d: %f\n",i,m(i))
      fprintf("Damping Coefficient Setup %d: %f\n",i,c(i))
      fprintf("Spring Constant Setup %d: %f\n",i,k(i))
+
+     natural_freq = sqrt(k(i)/m(i));
+     damp_ratio = c(i)/(2*sqrt(m(i)*k(i)));
+     fprintf("Damping Ratio Setup %d: %f\n",i,damp_ratio)
+     fprintf("Natural Frequency Setup %d: %f\n",i,natural_freq)
  end
      
  %% Question 8
