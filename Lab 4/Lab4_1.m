@@ -17,6 +17,12 @@ time_files = ["t1_1_1.txt" "t1_1_2.txt" "t1_1_3.txt" "t1_1_4.txt" "t1_1_5.txt"];
 m = [0 1.9585 1.9585 0 1.9585];
 k = [0 0 0 0 0];
 c = [0 0 0 0 0];
+
+% figure()
+% [t,force,disp1,disp2] = readf(time_files(1));
+% plot(t,disp1)
+% xlabel("Time (s)"); ylabel("Displacement (mm)")
+% title("System Identification Test 1 Response")
  %% Question 1
  
  % Car 1 Data
@@ -30,7 +36,7 @@ c = [0 0 0 0 0];
      [t,force,disp1,disp2] = readf(time_files(i));
      [wn(i),dampingRatio(i)] = getNaturalFreq(t,disp2);
  end
-%%
+
 wn_ratio1 = wn(2)/wn(1);
 wn_ratio2 = wn(5)/wn(4);
 mass1 = (1.9585*wn_ratio1^2)/(1 - wn_ratio1^2)
