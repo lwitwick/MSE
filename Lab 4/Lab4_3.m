@@ -55,8 +55,8 @@ ttt=tt(indx2);
 % frequency vector
 fff1 = 0:1/ttt(end):(length(ttt)-1)/ttt(end);
 
-z1(i) = max(abs(fft(yyy1))/(length(fft(yyy1))/2));
-fprintf("z1 %d: %f\n",i,z1(i))
+Z1(i) = max(abs(fft(yyy1))/(length(fft(yyy1))/2));
+fprintf("z1 %d: %f\n",i,Z1(i))
 
 
 figure()
@@ -87,8 +87,8 @@ ttt=tt(indx2);
 % frequency vector
 fff2 = 0:1/ttt(end):(length(ttt)-1)/ttt(end);
 
-z2(i) = max(abs(fft(yyy2))/(length(fft(yyy2))/2));
-fprintf("z2 %d: %f\n",i,z2(i))
+Z2(i) = max(abs(fft(yyy2))/(length(fft(yyy2))/2));
+fprintf("z2 %d: %f\n",i,Z2(i))
 
 figure()
 hold on
@@ -101,3 +101,15 @@ title("FFT Results Frequency: "+ string(freq(i))+" Hz")
 legend("Car 1","Car 2")
 hold off
 end
+
+%% Question 5
+
+for i = [2 4]
+    fft_ratio(i/2) = Z2(i)/Z1(i);
+    fprintf("FFT ratio test %d: %f\n",i,fft_ratio(i/2))
+    [amplitude_ratio(i/2), phase_diff(i/2)] = amp_phase(time_files(i), freq(i));
+    fprintf("Steady State Ratio %d: %f\n",i,amplitude_ratio(i/2))
+    fprintf("Steady State Phase Difference %d: %f\n",i,phase_diff(i/2))
+end
+
+
