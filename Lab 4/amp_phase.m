@@ -3,12 +3,6 @@ function [amplitude_ratio, phase_diff] = amp_phase(file_name, freq)
 % Reading file
 [time,force,disp1,disp2] = readf(file_name);
 
-figure()
-plot(time,disp1)
-
-figure()
-plot(time,disp2)
-
 % Plot over specific time intervals
 tl = 20; % Desired lower bound
 tu = 30; % Desired upper bound
@@ -17,7 +11,7 @@ plot(time(tl*1000+1:tu*1000),disp1(tl*1000+1:tu*1000))
 hold on 
 plot(time(tl*1000+1:tu*1000),disp2(tl*1000+1:tu*1000))
 hold off
-legend('Force','Response')
+legend('Car 1','Car 2')
 
 
 % Finding index for 1 complete cycle in steady state region
@@ -42,7 +36,8 @@ hold on
 plot(tt,d2,'r')
 xlabel('Time (s)')
 ylabel('Amplitude (mm)')
-legend('Car 1','Car 2')
+
+title('Steady State One Cycle Frequency = '+string(freq)+' Hz')
 
 % Finding amplitude ratio
 
@@ -61,6 +56,7 @@ t2 = tt(indx_amp_d2);
 % Plot these points
 plot(t1,max(d1),'*')
 plot(t2,max(d2),'*r')
+legend('Car 1','Car 2','','')
 
 % Calculate
 amplitude_ratio = amp_d2/amp_d1;

@@ -112,4 +112,10 @@ for i = [2 4]
     fprintf("Steady State Phase Difference %d: %f\n",i,phase_diff(i/2))
 end
 
+%% Question 6
+% Draw the mode shape for test 2 and 4
 
+for i = [2 4]
+    figure()
+    draw_mode_shape(Z1(i),Z2(i),i)    
+end

@@ -39,6 +39,34 @@ plot(freq,pha2)
 xlabel("Frequency (Hz)"); ylabel("Phase (rad)")
 legend("Car 1","Car 2")
 hold off
+
+figure()
+hold on
+plot(freq,amp1)
+plot(freq,amp2)
+title("Experiment 2, Test "+string(i)+" FRF");
+xlabel("Frequency (Hz)"); ylabel("Amplitude (mm/N)")
+legend("Car 1","Car 2")
+
+% Find Peak 1 Car 1 and 2 amplitudes
+[x1, ~] = ginput(2);
+indx1 = find(freq>x1(1) & freq<x1(2));
+aa11 = amp1(indx1);
+aa12 = amp2(indx1);
+peak11(i) = max(aa11);
+peak12(i) = max(aa12);
+peak1_ratio(i) = peak12(i)/peak11(i);
+fprintf("Peak 1 Ratio Test %d: %f\n",i,peak1_ratio(i))
+
+% Find Peak 2 Car 1 and 2 amplitudes
+[x2, ~] = ginput(2);
+indx2 = find(freq>x2(1) & freq<x2(2));
+aa21 = amp1(indx2);
+aa22 = amp2(indx2);
+peak21(i) = max(aa21);
+peak22(i) = max(aa22);
+peak2_ratio(i) = peak22(i)/peak21(i);
+fprintf("Peak 2 Ratio Test %d: %f\n",i,peak2_ratio(i))
 end
 
 %% Question 3
