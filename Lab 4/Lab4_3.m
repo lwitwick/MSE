@@ -131,18 +131,19 @@ subplot(2,1,1)
 hold on
 plot(t1,y_dof1*1000)  % plot the displacement response of DOF#1
 xlabel('Time(sec)')
-ylabel('DOF#1 (X1) Response')
+ylabel('DOF#1 (X1) Response (mm)')
 plot(t,disp1)
-legend("simulaion","experimental")
+legend("Simulaion","Experimental")
+title("Simulated 2-DOF Dyanmic System "+string(i))
 grid on
 hold off
 
 subplot(2,1,2)
 hold on
 plot(t1,y_dof2*1000) % plot the displacement response of DOF#2
-plot(t,disp1)  % plot the experimental 
+plot(t,disp2)  % plot the experimental 
 xlabel('Time(sec)')
-ylabel('DOF#2 (X2) Response')
+ylabel('DOF#2 (X2) Response (mm)')
 hold off
 grid on
 
