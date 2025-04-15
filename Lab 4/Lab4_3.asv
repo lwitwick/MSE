@@ -107,6 +107,42 @@ end
 for i = [2 4]
     fft_ratio(i/2) = Z2(i)/Z1(i);
     fprintf("FFT ratio test %d: %f\n",i,fft_ratio(i/2))
+    [amplitude_ratio(i/2), phase_diff(i/2)] = amp_phase(time_files(i), freq(i));
+    fprintf("Steady State Ratio %d: %f\n",i,amplitude_ratio(i/2))
+    fprintf("Steady State Phase Difference %d: %f\n",i,phase_diff(i/2))
 end
 
+%% Question 6
+% Draw the mode shape for test 2 and 4
 
+for i = [2 4]
+    figure()
+    draw_mode_shape(Z1(i),Z2(i),i)    
+end
+
+%% Question 7
+
+for i = 1:5
+[t1,y] = mdof_odesolver(freq(i),1,30);
+[t, force, disp1, disp2] = readf(time_files(i));
+
+figure()
+subplot(2,1,1)
+hold on
+plot(t1,y(:,1))  % plot the displacement response of DOF#1
+xlabel('Time(sec)')
+ylabel('DOF#1 (X1) Response')
+plot(t,disp1)
+grid on
+hold off
+
+subplot(2,1,2)
+hold on
+plot(t1,y(:,3)) % plot the displacement response of DOF#2
+plot(t,disp1)  % plot the experimental 
+xlabel('Time(sec)')
+ylabel('DOF#2 (X2) Response')
+hold off
+grid on
+
+end

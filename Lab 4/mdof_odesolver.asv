@@ -6,7 +6,7 @@ global m1 c1 k1 m2 c2 k2 k3 freq ampl
 % Definition of Parameters (All values are in SI Units)
 m1 = 0.797;           % Mass#1 or Inertia #1
 m2 = 0.576;           % Mass#2 or Inertia #2 
-c1 = 1.916;           % Damping Coefficient #1
+c1 = 0.2;           % Damping Coefficient #1
 c2 = 1.184;           % Damping Coefficient #2
 k1 = 395;           % Spring Constant #1
 k2 = 212;           % Spring Constant #2

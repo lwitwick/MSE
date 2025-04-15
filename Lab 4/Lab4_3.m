@@ -119,3 +119,31 @@ for i = [2 4]
     figure()
     draw_mode_shape(Z1(i),Z2(i),i)    
 end
+
+%% Question 7
+
+for i = 1:5
+[t1,y_dof1,y_dof2] = mdof_odesolver(freq(i),1,30);
+[t, force, disp1, disp2] = readf(time_files(i));
+
+figure()
+subplot(2,1,1)
+hold on
+plot(t1,y_dof1*1000)  % plot the displacement response of DOF#1
+xlabel('Time(sec)')
+ylabel('DOF#1 (X1) Response')
+plot(t,disp1)
+legend("simulaion","experimental")
+grid on
+hold off
+
+subplot(2,1,2)
+hold on
+plot(t1,y_dof2*1000) % plot the displacement response of DOF#2
+plot(t,disp1)  % plot the experimental 
+xlabel('Time(sec)')
+ylabel('DOF#2 (X2) Response')
+hold off
+grid on
+
+end
