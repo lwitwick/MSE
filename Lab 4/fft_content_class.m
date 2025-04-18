@@ -2,7 +2,7 @@ close all
 clear all
 clc
 
-[t, force, disp1, disp2] = readf('t3_1_1.txt');
+[t, force, disp1, disp2] = readf('t4_1_1.txt');
 
 T=30; %sec
 Fs = 1000; %Hz
